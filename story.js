@@ -33,7 +33,7 @@ function update(){scheduled=false;height=innerHeight;width=innerWidth;const mobi
  case'swamp':{transform($('.swamp-land'),`scale(${1+p*.1})`);fade($('.swamp-land'),.36);const reveal=smooth(.05,.35,p);transform($('.swamp-reveal'),`translateY(${(1-reveal)*height*.48}px) rotate(${mix(-35,12,reveal)}deg)`);fade($('.swamp-reveal'),reveal);$$('.swamp-prop').forEach((el,i)=>{const t=smooth(.22+i*.13,.44+i*.13,p);fade(el,t);transform(el,`translateY(${(1-t)*100}px) rotate(${(1-t)*(i%2?-18:18)}deg)`)});break;}
 
  case'finding':{const t=smooth(.08,.6,p);transform($('.anatomy-wheel'),`rotate(${t*65}deg) scale(${1-t*.1})`);transform($('.anatomy-axle'),`translateX(${(1-t)*width*.5}px) rotate(-12deg)`);fade($('.label-hole'),1-smooth(.38,.6,p));fade($('.label-axle'),smooth(.4,.65,p));cycleText($$('.finding-line'),p);break;}
- case'vessel':{const t=smooth(.12,.55,p);fade($('.vessel-pot'),1-t);transform($('.vessel-pot'),`translateX(${-t*width*.4}px) rotate(${-t*20}deg) scale(${1-t*.3})`);fade($('.vessel-machine'),smooth(.32,.6,p));$$('[data-piece]').forEach((el,i)=>{const q=smooth(.35+i*.07,.55+i*.07,p);transform(el,`translate(${(1-q)*(i%2?160:-160)}px,${(1-q)*(-140-i*20)}px) rotate(${(1-q)*(i%2?20:-20)}deg)`);fade(el,q)});cycleText($$('.vessel-line'),p);break;}
+ case'vessel':{const t=smooth(.12,.72,p);fade($('.vessel-pot'),1);transform($('.vessel-pot'),`translateX(${-t*width*.12}px) rotate(${-t*5}deg) scale(${1+t*.16})`);cycleText($$('.vessel-line'),p);break;}
  case'nag':{const pos=p*4;$$('.speech').forEach((el,i)=>{const d=i-pos,vis=1-smooth(.2,.85,Math.abs(d));fade(el,vis);transform(el,`translate(${d*(i%2?-45:45)}px,${Math.abs(d)*30}px)`);el.setAttribute('aria-hidden',String(vis<.5))});transform($('.monk'),`translateX(${(1-smooth(0,.15,p))*-100}px) rotate(${Math.sin(p*16)*1.4}deg)`);transform($('.king'),`translateX(${(1-smooth(0,.15,p))*100}px) rotate(${Math.sin(p*16+2)*1.4}deg)`);fade($('.nag-conclusion'),smooth(.88,1,p));break;}
  case'parade':{const first=smooth(.05,.3,p),out=smooth(.45,.65,p),second=smooth(.52,.77,p);transform($('.drais'),`translate3d(${mix(width*.75,0,first)-out*width*.95}px,${mix(50,0,first)}px,0) rotate(${mix(15,-6,first)-out*12}deg)`);fade($('.drais'),first*(1-out));$('.drais').classList.toggle('is-in',first>.85&&out<.3);transform($('.omnibus'),`translate3d(${mix(width*.7,0,second)}px,0,0)`);fade($('.omnibus'),second);break;}
  case'ending':{const stages=$$('.round-scene'),pos=p*(stages.length-1);stages.forEach((el,i)=>{const d=i-pos,vis=1-smooth(.2,.85,Math.abs(d));fade(el,vis);el.style.visibility=vis>.001?'visible':'hidden';el.setAttribute('aria-hidden',String(vis<.5));transform(el.querySelector('.round-object'),`translateY(${Math.abs(d)*height*.25}px) rotate(${d*(i===2?5:45)}deg) scale(${1-Math.min(Math.abs(d),1)*.18})`);transform(el.querySelector('.round-bg'),`scale(${1.04+Math.min(Math.abs(d),1)*.07})`)});transform($('.minute-hand'),`rotate(${p*1080}deg)`);break;}
@@ -48,3 +48,15 @@ function returnToStart(){if(returning)return;returning=true;const from=scrollY,s
 $('#again').addEventListener('click',returnToStart);
 // The reader can always cancel a rewind with Escape; the page never locks native scrolling.
 addEventListener('keydown',e=>{if(e.key==='Escape'&&returning){cancelAnimationFrame(returnFrame);returning=false;document.documentElement.style.scrollBehavior='';queue()}});
+
+// Pause decorative motion outside the viewport, and let the reader stop it.
+const inkDrawings=$$('.scene-etch,.object-etch');
+if(!reduced&&'IntersectionObserver' in window){
+ const inkObserver=new IntersectionObserver(entries=>entries.forEach(({target,isIntersecting})=>target.classList.toggle('art-in-view',isIntersecting)),{threshold:0});
+ inkDrawings.forEach(el=>inkObserver.observe(el));
+}else if(!reduced){inkDrawings.forEach(el=>el.classList.add('art-in-view'))}
+$('#artMotion').addEventListener('click',()=>{
+ const paused=document.documentElement.classList.toggle('art-paused');
+ $('#artMotion').setAttribute('aria-pressed',String(paused));
+ $('#artMotion').textContent=paused?'Оживить рисунки':'Остановить рисунки';
+});

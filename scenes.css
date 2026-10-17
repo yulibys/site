@@ -27,3 +27,59 @@ html:not(.js) .before,html:not(.js) .nag,html:not(.js) .ending,html:not(.js) .ve
 .before .pin,.before .prior-item figcaption{color:#f2eedb}.assembly .cart-canvas{height:100%;max-height:none}.prior-item .object{max-width:none}
 html:not(.js) .before .before-stage{display:block;margin:30px 0}html:not(.js) .before .prior-item{height:600px;margin:30px 0}html:not(.js) .before .prior-item .object{height:70%}html:not(.js) .before .prior-item figcaption{top:35%}
 @media(max-width:760px){html:not(.js) .before .prior-item figcaption{top:70%;bottom:auto}html:not(.js) .before .prior-item .object{height:60%}}
+/* v26 palette: warm paper, charcoal ink, muted marsh green and pale mint. */
+:root{--ground:#171511;--ink:#f2ead8;--secondary:#b8ad98;--light:#efe6d2;--accent:#bb6044}
+body{background:#171511;color:#f2ead8}
+.rewind,.rewind .pin{background:#171511;color:#f2ead8}
+.choice{background:#171511;color:#f2ead8}
+.choice .choices button{color:#f0e7d2}.choice .choices button:hover,.choice .choices button[aria-pressed=true]{color:#d48160}
+.choice .reply{color:#c5baa4}
+.before,.before .pin{background:#efe6d2;color:#29271f}
+.before .prior-item figcaption,.before .prior-item h3{color:#29271f}
+.before .prior-item figcaption p{color:#565142}
+.before .object-etch{color:#9c6845;opacity:.72}
+.before .prior-item figcaption:before{border-color:#9c6845}
+.swamp,.swamp .pin{background:#273b35;color:#f1e8d5}
+.swamp-land{filter:sepia(.18) saturate(.75);opacity:.52}
+.swamp .swamp-prop figcaption{color:#f3ead8}
+.finding,.finding .pin{background:#171511;color:#f1e9d7}
+.finding h2{color:#f1e9d7}.finding-copy,.anatomy-label{color:#eee3cd}
+.finding .note-arrow{color:#d1ad7e}
+.artifact-original{background:#171511;color:#eee3cd}.artifact-original p,.finding figcaption{color:#c0b49d}
+.vessel,.vessel .pin{background:#171511;color:#f1e9d7}
+.vessel figcaption,.vessel .vessel-line{color:#eee3cd}
+.vessel .scene-etch{color:#a7a18b;opacity:.36}
+.lab{background:#dce6d8 url('assets/valley.png') center bottom/cover;color:#20382e}
+.lab:before{background:#dce6d8;opacity:.88}
+.assembly-empty{background:transparent;color:#2b4439}
+.parts button{border-color:#637868;color:#20382e;background:rgba(239,246,232,.46)}
+.parts button:hover,.parts button[aria-pressed=true]{background:#28463a;color:#f3ead7}
+.cart-reset{color:#29483a}
+.nag,.nag .pin{background:#171511;color:#f1e8d6}
+.dialogue-context,.speech cite,.nag-conclusion{color:#c7bba4}
+.nag .scene-etch{color:#c0a97e}
+.parade,.parade .pin{background:#efe6d2;color:#29271f}
+.parade figcaption,.parade-aside{color:#514b3c}
+.day{background:#efe6d2;color:#29271f}
+.day figcaption,.day .day-note,.day time{color:#6c684f}
+.schedule li{border-color:#c9bda5}
+.everywhere{background:#171511;color:#f1e8d6}
+.everywhere figcaption,.everywhere-copy p{color:#d6cbb4}
+.ending .pin{background:#171511}
+.round-scene{color:#29271f}.round-scene:after{background:#efe6d2;opacity:.12}
+.round-wood{color:#f3ead6}.round-wood>p{background:#efe6d2;color:#29271f}
+.round-pill{color:#284335}.round-pill>p{background:#efe6d2;color:#29271f}
+.round-fair{color:#f6ecd7}.round-fair>p,.round-clock>p{background:#26392f;color:#f3ead7}
+.round-clock{color:#f5ead5}
+.loop{background:#171511;color:#f1e8d6}
+.loop .muted{color:#b8ad98}
+.loop .text-action{color:#e6c995}.loop .text-action:hover{color:#fff0d4}
+footer{background:#12110e;color:#eee5d2}footer .authors span,footer details{color:#d1c6ae}footer a{color:#e9bd85}
+#sound{border-color:#c5b99f;color:#eee5d2}
+@media(max-width:760px){.before .prior-item figcaption p{color:#514b3c}.lab{background-color:#dce6d8}.choice .reply{color:#d6cbb4}}
+/* Keep the historical image scene distinct from the hands-on cart builder. */
+.vessel .vessel-pot{left:48%;top:24%;width:43%;z-index:3}
+.vessel .vessel-pot>img{max-height:58svh}
+.vessel .vessel-pot p{max-width:34ch;margin:18px auto 0}
+.vessel .vessel-line{left:var(--pad);top:39%;max-width:31ch}
+@media(max-width:760px){.vessel .vessel-pot{left:13%;top:31%;width:74%}.vessel .vessel-pot>img{max-height:43svh}.vessel .vessel-line{top:22%;left:20px;max-width:28ch}}
